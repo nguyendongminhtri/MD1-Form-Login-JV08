@@ -43,7 +43,7 @@
                                         <div class="form-outline flex-fill mb-0">
                                             <input oninput="checkValidate()" type="text" id="username"
                                                    class="form-control"/>
-                                            <label class="form-label">Your Name</label>
+                                            <label id="validate_username" class="form-label">Your Name</label>
                                         </div>
                                     </div>
 
@@ -53,7 +53,7 @@
                                         <div class="form-outline flex-fill mb-0">
                                             <input oninput="checkValidate()" type="email" id="email"
                                                    class="form-control"/>
-                                            <label class="form-label">Your Email</label>
+                                            <label id="validate_email" class="form-label">Your Email</label>
                                         </div>
                                     </div>
                                     <!--PASSWORD-->
@@ -71,7 +71,7 @@
                                         <div class="form-outline flex-fill mb-0">
                                             <input oninput="checkValidate()" type="password" id="confirm_password"
                                                    class="form-control"/>
-                                            <label class="form-label">Repeat your password</label>
+                                            <label id="validate_confirm" class="form-label">Repeat your password</label>
                                         </div>
                                     </div>
 
@@ -114,8 +114,14 @@
     function checkValidate() {
         name = document.getElementById('name').value;
         console.log('goi ham checkValidate')
-        if (name.trim() === '') {
-            document.getElementById('validate_name').innerHTML = '<label style="color: red">The name is required! Please try again!</label>'
+        // if (name.trim() === '' || username.trim()===''|| email.trim()==''||password.trim()===''||confirmPassword.trim()==='' ) {
+        //     document.getElementById('validate_name').innerHTML = '<label style="color: red">The name is required! Please try again!</label>'
+        //     document.getElementById('validate_name').innerHTML = '<label style="color: red">The name is required! Please try again!</label>'
+        // }
+        if(confirmPassword!==password){
+            document.getElementById('validate_confirm').innerHTML = '<label style="color: red">The password do not match!</label>'
+        } else {
+            document.getElementById('validate_confirm').innerHTML = '<label style="color: blue">Confirm success!</label>'
         }
     }
 
