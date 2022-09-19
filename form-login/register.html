@@ -14,6 +14,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="../model/Users.js"></script>
 </head>
 <body>
 <section class="vh-100" style="background-color: #eee;">
@@ -84,7 +85,7 @@
                                     </div>
 
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <button type="button" class="btn btn-primary btn-lg">Register</button>
+                                        <button onclick="register()" type="button" class="btn btn-primary btn-lg">Register</button>
                                     </div>
 
                                 </form>
@@ -110,24 +111,44 @@
     let email;
     let password;
     let confirmPassword;
-
+    let listUsers;
     function checkValidate() {
         name = document.getElementById('name').value;
+        password = document.getElementById('password').value;
+        confirmPassword = document.getElementById('confirm_password').value;
         console.log('goi ham checkValidate')
+        //CHECK USERNAME vs EMAIL co trung lap hay khong? Thong listUser lay tu LocalStorage
+
         // if (name.trim() === '' || username.trim()===''|| email.trim()==''||password.trim()===''||confirmPassword.trim()==='' ) {
         //     document.getElementById('validate_name').innerHTML = '<label style="color: red">The name is required! Please try again!</label>'
         //     document.getElementById('validate_name').innerHTML = '<label style="color: red">The name is required! Please try again!</label>'
         // }
         if(confirmPassword!==password){
+            console.log('vao if khong')
             document.getElementById('validate_confirm').innerHTML = '<label style="color: red">The password do not match!</label>'
         } else {
             document.getElementById('validate_confirm').innerHTML = '<label style="color: blue">Confirm success!</label>'
         }
     }
 
-    // function register() {
-    //
-    // }
+    function register() {
+        username = document.getElementById('username').value;
+        email = document.getElementById('email').value;
+        let id;
+        if(listUsers==null){
+            listUsers = [];
+            id = 1;
+        } else {
+            listUsers = JSON.parse(window.localStorage.getItem('list_user'));
+            id = listUsers[listUsers.length-1].id +1;
+
+        }
+        let user = new Users(id,name,username,email,password);
+        listUsers.push(user);
+        window.localStorage.setItem('list_user', JSON.stringify(listUsers));
+        console.log('list user ----> ', listUsers)
+        window.location.href = 'login.html';
+    }
 </script>
 </body>
 </html>
